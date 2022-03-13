@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #include<iostream>
 using namespace std;
 
@@ -64,16 +64,4 @@ int main(){
     l.sort();
     l.print();
 }
-=======
-#include<bits/stdc++.h>
-class Node{
-    int data;
-    node(int d){
-        data=d;
-        node *next;
-    }
-};
-class linkedList{
 
-};
->>>>>>> 71f3d7257d7a7940e1ce3f586a38236ce8eb9a3c
