@@ -36,7 +36,7 @@ public:
             cout<<temp->data<<" ";
             temp=temp->next;
         }
-        cout<<endl;
+        cout<<endl; 
     }
     void sort(){
         Node *temp=head;
@@ -65,4 +65,7 @@ int main(){
     l.print();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e27eb783398d612990abd5828d999154a99b53d0
