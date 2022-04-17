@@ -1,17 +1,19 @@
-
 #include<iostream>
 using namespace std;
-        
-class Node{
+class Node
+{
 public:
     int data;
     Node *next;
+    Node *prev;
     Node(int d){
         data=d;
         next=NULL;
+        prev=NULL;
     }
 };
-class LinkedList{
+class LinkedList
+{
 public:
     Node *head;
     LinkedList(){
@@ -28,6 +30,7 @@ public:
                 temp=temp->next;
             }
             temp->next=newNode;
+            newNode->prev=temp;
         }
     }
     void print(){
@@ -58,14 +61,10 @@ int main(){
     l.insert(5);
     l.insert(4);
     l.insert(3);
-    l.insert(2);
-    l.insert(1);
     l.print();
     l.sort();
     l.print();
+    return 0;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> e27eb783398d612990abd5828d999154a99b53d0
