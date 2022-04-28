@@ -31,7 +31,6 @@ int main()
             ++k;
         }
         count1 = count = k = 0;
-
         cout << endl;
     }
     return 0;
