@@ -63,11 +63,7 @@ int main()
     q.enqueue(6);
     q.display();
     q.dequeue();
-    q.dequeue();
-    q.dequeue();
-    q.dequeue();
-    q.dequeue();
-    q.dequeue();
+  
     q.display();
     return 0;
 }
