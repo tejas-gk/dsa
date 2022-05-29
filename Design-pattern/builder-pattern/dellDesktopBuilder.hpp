@@ -5,7 +5,7 @@
 
 class dellDesktopBuilder:public DesktopBuilder{
     public:
-        dellDesktopBuilder();
+        // dellDesktopBuilder();
         void buildMonitor();
         void buildKeyboard();
         void buildMouse();
