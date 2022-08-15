@@ -5,7 +5,7 @@ class stack{
     int top;
     int capacity;
 public:
-    stack(int cap){
+        stack(int cap){
         capacity=cap;
         arr=new int[capacity];
         top=-1;

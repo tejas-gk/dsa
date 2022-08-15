@@ -7,8 +7,8 @@ class Queue
 public:
     Queue(int size)
     {
-        this->size = size;
-        arr = new int[size];
+       size = size;
+        arr = new int[size];//why is this important
         front = -1;
         rear = -1;
     }
