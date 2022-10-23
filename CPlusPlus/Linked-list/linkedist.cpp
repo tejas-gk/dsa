@@ -52,6 +52,80 @@ public:
             temp=head;
         }
     }
+
+    int search(int key){
+        Node *temp=head;
+        int count=0;
+        while(temp!=NULL){
+            if(temp->data==key){
+                return count;
+            }
+            count++;
+            temp=temp->next;
+        }
+        return -1;
+    }
+    void deleteNode(int key){
+        Node *temp=head;
+        if(temp->data==key){
+            head=temp->next;
+            delete temp;
+            return;
+        }
+        while(temp->next!=NULL){
+            if(temp->next->data==key){
+                Node *temp1=temp->next;
+                temp->next=temp->next->next;
+                delete temp1;
+                return;
+            }
+            temp=temp->next;
+        }
+    }
+    void reverse(){
+        Node *prev=NULL;
+        Node *curr=head;
+        Node *next=NULL;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+    }
+    void reverseRecursive(Node *curr,Node *prev){
+        if(curr==NULL){
+            head=prev;
+            return;
+        }
+        Node *next=curr->next;
+        curr->next=prev;
+        reverseRecursive(next,curr);
+    }
+    void reverseRecursive(){
+        reverseRecursive(head,NULL);
+    }
+    
+    void reverseKRecursive(Node *curr,Node *prev,int k){
+        if(curr==NULL){
+            head=prev;
+            return;
+        }
+        Node *next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+        k--;
+        if(k==0){
+            head->next=curr;
+            reverseKRecursive(curr,prev,k);
+        }
+    }
+    void reverseKRecursive(int k){
+        reverseKRecursive(head,NULL,k);
+    }
+     
 };
 int main(){
     LinkedList l;
@@ -60,8 +134,20 @@ int main(){
     l.insert(3);
     l.insert(2);
     l.insert(1);
+    
     l.print();
+    l.reverseKRecursive(2);
+    l.print();
+
     l.sort();
+    l.search(3);
     l.print();
+    l.deleteNode(3);
+    l.print();
+    l.reverse();
+    l.print();
+    l.reverseRecursive();
+    l.print();
+
 }
 
