@@ -1,50 +1,89 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// double ended queue
+#define MAX_SIZE 100
 
-int queue[100];
-int front = -1, rear = -1;
-
-void enqueue(int item)
+typedef struct deque
 {
-    if (front == -1)
-    {
-        front = 0;
-    }
-    rear++;
-    queue[rear] = item;
+    int data[MAX_SIZE];
+    int front, rear;
+} Deque;
+
+void init(Deque *deque)
+{
+    deque->front = deque->rear = MAX_SIZE / 2;
 }
 
-int dequeue()
+int is_empty(Deque *deque)
 {
-    int item;
-    item = queue[front];
-    front++;
-    return item;
+    return deque->front == deque->rear;
+}
+
+int is_full(Deque *deque)
+{
+    return deque->front == (deque->rear + 1) % MAX_SIZE;
+}
+
+void insert_front(Deque *deque, int x)
+{
+    if (is_full(deque))
+    {
+        printf("Error: Deque is full\n");
+        return;
+    }
+    deque->front = (deque->front - 1 + MAX_SIZE) % MAX_SIZE;
+    deque->data[deque->front] = x;
+}
+
+void insert_rear(Deque *deque, int x)
+{
+    if (is_full(deque))
+    {
+        printf("Error: Deque is full\n");
+        return;
+    }
+    deque->data[deque->rear] = x;
+    deque->rear = (deque->rear + 1) % MAX_SIZE;
+}
+
+int delete_front(Deque *deque)
+{
+    if (is_empty(deque))
+    {
+        printf("Error: Deque is empty\n");
+        return -1;
+    }
+    int x = deque->data[deque->front];
+    deque->front = (deque->front + 1) % MAX_SIZE;
+    return x;
+}
+
+int delete_rear(Deque *deque)
+{
+    if (is_empty(deque))
+    {
+        printf("Error: Deque is empty\n");
+        return -1;
+    }
+    deque->rear = (deque->rear - 1 + MAX_SIZE) % MAX_SIZE;
+    return deque->data[deque->rear];
 }
 
 int main()
 {
-    int choice, item;
-    while (1)
+    Deque deque;
+    init(&deque);
+
+    insert_front(&deque, 1);
+    insert_front(&deque, 2);
+    insert_rear(&deque, 3);
+    insert_rear(&deque, 4);
+
+    while (!is_empty(&deque))
     {
-        printf("1. Enqueue an element \t 2. Dequeue an element \t 3. Exit");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-        switch (choice)
-        {
-        case 1:
-            printf("Enter the element to be inserted: ");
-            scanf("%d", &item);
-            enqueue(item);
-            break;
-        case 2:
-            item = dequeue();
-            printf("Deleted element is %d", item);
-            break;
-        case 3:
-            exit(0);
-        }
+        printf("%d ", delete_front(&deque));
     }
+    printf("\n");
+
+    return 0;
 }
