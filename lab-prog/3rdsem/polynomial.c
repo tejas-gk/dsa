@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-
+// help me i regret my decision to do this
 struct node{
     int coeff, expox, expoy, expoz;
     struct node *next;
