@@ -47,9 +47,10 @@ void findpaths(int m[50][50], int row, int col, int n)
             {
                 printf("%d ", visited[i][j]);
             }
+            printf("\n");
+        }
             visited[row][col] = 0;
             return;
-        }
     }
     // If the current position is not the destination then mark the current position as visited.
     else
