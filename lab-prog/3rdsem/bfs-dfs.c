@@ -20,6 +20,7 @@ void bfs(int v)
     }
 }
 
+
 void dfs(int v){
     int i;
     printf("%d ",v); //print the current vertex

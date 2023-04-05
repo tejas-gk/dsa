@@ -56,3 +56,115 @@ void main(){
         }
     }
 }
+
+NODE createnode(){
+    NODE newnode;
+    newnode=(NODE)malloc(sizeof(struct node));
+    printf("Enter the name: ");
+    scanf("%s",newnode->name);
+    printf("Enter the phone number: ");
+    scanf("%s",newnode->phno);
+    newnode->leftchild=NULL;
+    newnode->rightchild=NULL;
+    return newnode;
+}
+
+void insertBST(NODE root,NODE newnode){
+    if(strcmp(newnode->name,root->name)<0){
+        if(root->leftchild==NULL)
+            root->leftchild=newnode;
+        else
+            insertBST(root->leftchild,newnode);
+    }
+    if(strcmp(newnode->name,root->name)>0){
+        if(root->rightchild==NULL)
+            root->rightchild=newnode;
+        else
+            insertBST(root->rightchild,newnode);
+    }
+}
+
+int searchBST(NODE root,char key[]){
+    if(root==NULL)
+        return 0;
+    if(strcmp(key,root->name)==0)
+        return 1;
+    if(strcmp(key,root->name)<0)
+        return searchBST(root->leftchild,key);
+    else
+        return searchBST(root->rightchild,key);
+}
+
+NODE getrightmin(NODE root){
+    if(root->leftchild==NULL)
+        return root;
+    else
+        return getrightmin(root->leftchild);
+}
+
+NODE delete(NODE root,char key[]){
+    NODE temp;
+    if(root==NULL){
+        delflag=0;
+        return root;
+    }
+    if(strcmp(key,root->name)<0)
+        root->leftchild=delete(root->leftchild,key);
+    else if(strcmp(key,root->name)>0)
+        root->rightchild=delete(root->rightchild,key);
+    else{
+        delflag=1;
+        if(root->leftchild==NULL){
+            temp=root->rightchild;
+            free(root);
+            return temp;
+        }
+        else if(root->rightchild==NULL){
+            temp=root->leftchild;
+            free(root);
+            return temp;
+        }
+        else{
+            temp=getrightmin(root->rightchild);
+            strcpy(root->name,temp->name);
+            strcpy(root->phno,temp->phno);
+            root->rightchild=delete(root->rightchild,temp->name);
+        }
+    }
+    return root;
+}
+
+void preorder(NODE root){
+    if(root!=NULL){
+        printf("%s %s \t",root->name,root->phno);
+        preorder(root->leftchild);
+        preorder(root->rightchild);
+    }
+}
+
+void inorder(NODE root){
+    inorder(root->leftchild);
+    printf("%s %s \t",root->name,root->phno);
+    inorder(root->rightchild);
+}
+
+void postorder(NODE root){
+    postorder(root->leftchild);
+    postorder(root->rightchild);
+    printf("%s %s \t",root->name,root->phno);
+}
+
+void insertBST(NODE root,NODE newnode){
+    if(strcmp(newnode->name,root->name)<0){
+        if(root->leftchild==NULL)
+            root->leftchild=newnode;
+        else
+            insertBST(root->leftchild,newnode);
+    }
+    if(strcmp(newnode->name,root->name)>0){
+        if(root->rightchild==NULL)
+            root->rightchild=newnode;
+        else
+            insertBST(root->rightchild,newnode);
+    }
+}

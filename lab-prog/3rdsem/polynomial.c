@@ -45,11 +45,93 @@ void insert_rear(
 ){
     NODE temp, cur;
     temp = createnode(coeff, expox, expoy, expoz);
-    cur = head;
-    while(cur->next != NULL){
-        cur = cur->next;
+    if(head->link==head)
+        head->link=temp;
+    else{
+        cur=head;
+        while(cur->link!=head)
+            cur=cur->link;
+        temp->link = head;
+        head->coeff=(head->coeff)+1;
     }
-    cur->next = temp;
+}
+
+void createpoly(NODE poly){
+    int i, n, coeff, ex, ey, ez;
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n;i++){
+        printf("enter coeff");
+        scanf("%d", &coeff);
+        printf("enter x y and z");
+        scanf("%d%d%d", &ex, &ey, &ez);
+        insert_rear(coeff, ex, ey, ez,poly);
+    }
+}
+
+void display(NODE head){
+    NODE cur;
+    if(head->link==head)
+        printf("list is empty");
+    else {
+        cur = head->link;
+        while(cur!=head){
+            if(cur->coeff<0)
+                printf("%dx^%dy^%dz^%d", cur->coeff, cur->expox, cur->expoy, cur->expoz);
+            cur = cur->link;
+        }
+
+    }
+}
+
+double evaluate(
+    int x,int y,int z,NODE head
+){
+    double result = 0;
+    NODE cur;
+    if(head->link==head){
+        printf("list is empty");
+        return 0;
+    }
+    else{
+        cur = head->link;
+        while(cur!=head){
+            result += cur->coeff * pow(x, cur->expox) * pow(y, cur->expoy) * pow(z, cur->expoz);
+            cur = cur->link;
+        }
+        return result;
+    }
+}
+
+NODE polyadd(NODE a,NODE b){
+    NODE c,starta,startb;
+    int sum = 0;
+    starta = a->link;
+    startb = b->link;
+    c=createheadnode();
+    while((a!=starta)&&(b!=startb)){
+        if((a->expox==b->expox)&&(a->expoy==b->expoy)&&(a->expoz==b->expoz)){
+            sum = a->coeff + b->coeff;
+            insert_rear(c, sum, a->expox, a->expoy, a->expoz);
+            a = a->link;
+            b = b->link;
+        }else if((a->expox==b->expox)&&(a->expoy==b->expoy)){
+            // insert_rear(c, a->coeff, a->expox, a->expoy, a->expoz);
+            a = a->link;
+        else if((a->expox==b->expox)&&(a->expoz==b->expoz)&&(a->expoz>b->expoz)){
+            insert_rear(c, a->coeff, a->expox, a->expoy, a->expoz);
+            a = a->link;
+        }
+        else{
+            insert_rear(c, b->coeff, b->expox, b->expoy, b->expoz);
+            b = b->link;
+        }
+           
+    }
+    while(a!=starta){
+        insert_rear(c, a->coeff, a->expox, a->expoy, a->expoz);
+        a = a->link;
+    }
 }
 
 void main(){

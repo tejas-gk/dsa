@@ -83,5 +83,11 @@ void display()
             if (queue[i] < 20)
                 printf("%d ", queue[i]);
         }
+        printf('less than 30');
+        for (i = front; i <= rear; i++)
+        {
+            if (queue[i] < 30)
+                printf("%d ", queue[i]);
+        }
     }
 }
