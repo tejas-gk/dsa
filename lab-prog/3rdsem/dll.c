@@ -9,8 +9,7 @@ struct node
     struct node *next;
     struct node *prev;
 };
-typedef struct node *NODE;
-NODE first = NULL;
+ 
 
 NODE getnode()
 {
@@ -23,6 +22,7 @@ NODE getnode()
     }
     return x;
 }
+
 NODE createnode()
 {
     NODE temp;

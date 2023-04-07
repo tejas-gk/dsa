@@ -21,6 +21,8 @@ void bfs(int v)
 }
 
 
+ 
+
 void dfs(int v){
     int i;
     printf("%d ",v); //print the current vertex
@@ -32,7 +34,7 @@ void dfs(int v){
             dfs(i); //call dfs for the next vertex
         }
 }
-
+    
 void main()
 {
     int v;
@@ -57,3 +59,15 @@ void main()
     printf("The nodes which are reachable are: ");
     dfs(v);
 }
+
+// input
+// Enter the number of vertices: 4
+// Enter graph data in matrix form: 
+// 0 1 1 0
+// 1 0 0 1
+// 1 0 0 1
+// 0 1 1 0
+// Enter the starting vertex: 1
+// The nodes which are reachable are: 1-->2-->3-->4
+// The nodes which are reachable are: 1 2 4 3
+

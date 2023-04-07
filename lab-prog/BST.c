@@ -61,35 +61,36 @@ NODE getRightMin(NODE root){
         temp=temp->leftchild;
     }return temp;
 }
-NODE deleteBST(NODE root,char keyname[]){
-    if(!root){
-        delflag=-1;
-        return NULL;
+// Recursively delete a node from a BST
+NODE deleteBST(NODE root,char keyname[]){ // root is the root node of the BST, keyname[] is the name of the node to be deleted
+    if(!root){ // if the root is NULL
+        delflag=-1; // set the flag to -1 to indicate that the node is not found
+        return NULL; // return NULL
     }
-    if(strcmp(keyname,root->name)<0){
-        root->leftchild=deleteBST(root->leftchild,keyname);
-    }else if(strcmp(keyname,root->name)>0){
-        root->rightchild=deleteBST(root->rightchild,keyname);
-    }else{
-        if(root->leftchild==NULL && root->rightchild==NULL){
-            free(root);
-            return NULL;
+    if(strcmp(keyname,root->name)<0){ // if the name of the node to be deleted is less than the name of the root node
+        root->leftchild=deleteBST(root->leftchild,keyname); // recursively call deleteBST with the left child of the root node as the root node
+    }else if(strcmp(keyname,root->name)>0){ // if the name of the node to be deleted is greater than the name of the root node
+        root->rightchild=deleteBST(root->rightchild,keyname); // recursively call deleteBST with the right child of the root node as the root node
+    }else{ // if the name of the node to be deleted is equal to the name of the root node
+        if(root->leftchild==NULL && root->rightchild==NULL){ // if the root node has no children
+            free(root); // free the root node
+            return NULL; // return NULL
         }
-        else if(root->leftchild==NULL){
-            NODE temp=root->rightchild;
-            free(root);
-            return temp;
-        }else if(root->rightchild==NULL){
-            NODE temp=root->leftchild;
-            free(root);
-            return temp;
-        }else{
-            NODE rightmin=getRightMin(root->rightchild);
-            strcpy(root->name,rightmin->name);
+        else if(root->leftchild==NULL){ // if the root node has only a right child
+            NODE temp=root->rightchild; // set temp to the right child of the root node
+            free(root); // free the root node
+            return temp; // return the right child of the root node
+        }else if(root->rightchild==NULL){ // if the root node has only a left child
+            NODE temp=root->leftchild; // set temp to the left child of the root node
+            free(root); // free the root node
+            return temp; // return the left child of the root node
+        }else{ // if the root node has two children
+            NODE rightmin=getRightMin(root->rightchild); // set rightmin to the minimum node in the right subtree
+            strcpy(root->name,rightmin->name); // copy the name and phone number of the minimum node in the right subtree to the root node
             strcpy(root->phno,rightmin->phno);
-            root->rightchild=deleteBST(root->rightchild,rightmin->name);
+            root->rightchild=deleteBST(root->rightchild,rightmin->name); // recursively call deleteBST with the right child of the root node as the root node
         }
-    }return root;
+    }return root; // return the root node
 }
 
 void preorder(NODE temp){

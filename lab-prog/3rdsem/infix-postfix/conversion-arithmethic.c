@@ -17,14 +17,6 @@ char pop(){
         return stack[top--];
 }
 int priority(char x){
-    // if(x=='(')
-    //     return 0;
-    // if(x=='+'||x=='-')
-    //     return 1;
-    // if(x=='*'||x=='/')
-    //     return 2;
-    // if(x=='^')
-    //     return 3;
     switch(x){
         case '#' : return 0;
         case '(' : return 1;
@@ -39,7 +31,7 @@ int priority(char x){
 }
 
 void main(){
-    char infix[100],postfix[100],ch,x;
+    char infix[100],postfix[100],ch,x; 
     int i = 0, k = 0, pr;
     printf("Enter the infix expression: ");
     scanf("%s",infix);
@@ -51,6 +43,7 @@ void main(){
             postfix[k++]=ch;
         else if(ch==')'){
             while(stack[top]!='('){
+
                 postfix[k++]=pop();
                 if(stack[top]=='#'){
                     printf("Invalid expression");
